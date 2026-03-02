@@ -1,92 +1,145 @@
+// App.jsx
+import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    // Aplica la clase al body cuando cambia el tema
+    if (theme === "dark") {
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+    }
+  }, [theme]);
+
   return (
     <div className="container">
+      {/* Hero con botones de tema */}
+      <header className="hero">
+        <div className="hero-text">
+          <h1>Arturo Juárez</h1>
+          <h2>Licenciatura en Ingeniería de Software</h2>
+          <div className="divider"></div>
+          <a href="#about" className="btn">Ver mi trayectoria</a>
+        </div>
+        <div className="theme-buttons">
+          <button
+            className="theme-btn"
+            onClick={() => setTheme("light")}
+            disabled={theme === "light"}
+          >
+            Claro
+          </button>
+          <button
+            className="theme-btn"
+            onClick={() => setTheme("dark")}
+            disabled={theme === "dark"}
+          >
+            Oscuro
+          </button>
+        </div>
+      </header>
 
-      <section className="hero">
-        <h1>Hola, soy Arturo</h1>
-        <h2>Ingeniero en Software</h2>
-        <div className="divider"></div>
-        <a href="#cv" className="btn">Ver mi trayectoria</a>
-      </section>
+      {/* Left column */}
+      <div className="left-column">
+        <section className="contact">
+          <h3>Contacto</h3>
+          <p>📞 +52 773 680 2105</p>
+          <p>✉️ juarezmonroyarturo574@gmail.com</p>
+          <p>
+            🔗 <a href="https://www.linkedin.com/in/arturo-juárez-monroy-259a28171/" target="_blank" rel="noreferrer">linkedin.com/in/arturo-juárez</a>
+          </p>
+        </section>
 
-      <section className="about" id="cv">
-        <h3>Acerca de mí</h3>
-        <p>
-          Ingeniero en Software con experiencia en desarrollo web y aplicaciones.
-          Me interesan los proyectos creativos donde la estructura, el detalle
-          y la calidad forman parte esencial del resultado.
-        </p>
-      </section>
-
-      <section className="skills">
-        <h3>Habilidades</h3>
-        <div className="skills-grid">
-          <div>
-            <h4>Técnicas</h4>
-            <ul>
-              <li>JavaScript</li>
-              <li>React</li>
-              <li>React Native</li>
-              <li>PHP</li>
-              <li>Python</li>
-              <li>Firebase</li>
-            </ul>
+        <section className="skills">
+          <h3>Habilidades Técnicas</h3>
+          <div className="skills-grid">
+            <div>
+              <h4>Lenguajes</h4>
+              <ul>
+                <li>JavaScript</li>
+                <li>HTML</li>
+                <li>Python</li>
+                <li>PHP</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Frameworks / Librerías</h4>
+              <ul>
+                <li>React</li>
+                <li>React Native</li>
+                <li>Firebase</li>
+                <li>Vue</li>
+                <li>Tailwind CSS</li>
+                <li>Bootstrap</li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <h4>Personales</h4>
-            <ul>
-              <li>Creatividad</li>
-              <li>Adaptabilidad</li>
-              <li>Enfoque en el detalle</li>
-              <li>Compromiso con la calidad</li>
-              <li>Resiliencia</li>
-            </ul>
+        </section>
+
+        <section className="skills">
+          <h3>Habilidades Personales</h3>
+          <ul>
+            <li>Creatividad</li>
+            <li>Adaptabilidad</li>
+            <li>Enfoque en el detalle</li>
+            <li>Compromiso con la calidad</li>
+            <li>Resiliencia</li>
+          </ul>
+        </section>
+      </div>
+
+      {/* Right column */}
+      <div className="right-column">
+        <section className="about" id="about">
+          <h3>Acerca de mí</h3>
+          <p>
+            He trabajado en varios proyectos durante mis estudios, donde adquirí experiencia práctica en desarrollo de software. Me atraen especialmente los proyectos creativos y seguir mejorando mis habilidades mientras colaboro con otros desarrolladores.
+          </p>
+        </section>
+
+        <section className="projects">
+          <h3>Proyectos</h3>
+
+          <div className="card">
+            <h4>Pirámides de Tula con A‑Frame</h4>
+            <div className="date">Trabajo escolar · 2023</div>
+            <p>Usando la etiqueta A‑Frame para mostrar el lugar. El resultado fue un proyecto atractivo y detallado, destacando por su cuidado en la presentación.</p>
           </div>
-        </div>
-      </section>
 
-      <section className="projects">
-        <h3>Proyectos</h3>
+          <div className="card">
+            <h4>Sitio Web del bar "El Mezcalito"</h4>
+            <div className="date">Trabajo escolar · 2023</div>
+            <p>Desarrollé un sitio web utilizando PHP y Bootstrap para el bar "El Mezcalito" en Tula de Allende. El sitio permitía a los usuarios explorar el establecimiento, visualizar la variedad de bebidas y comidas disponibles y realizar reservaciones de manera conveniente y eficiente.</p>
+          </div>
 
-        <div className="card">
-          <h4>Pirámides de Tula (A-Frame)</h4>
-          <p>Proyecto visual 3D destacando presentación y detalle.</p>
-        </div>
+          <div className="card">
+            <h4>Portal Turístico de Hidalgo</h4>
+            <div className="date">Servicio social · 2024</div>
+            <p>Desarrollé un sitio web para la Secretaría de Turismo en Hidalgo para ofrecer a los visitantes una experiencia completa. El sitio incluye noticias, eventos y actividades turísticas, un calendario de eventos, mapas interactivos de lugares interesantes y filtros de navegación.</p>
+          </div>
 
-        <div className="card">
-          <h4>Sitio Web "El Mezcalito"</h4>
-          <p>Desarrollo con PHP y Bootstrap para gestión y reservaciones.</p>
-        </div>
+          <div className="card">
+            <h4>Aplicación de Mapas Personalizados (SIG Hidalgo)</h4>
+            <div className="date">Trabajo para titulación · 2025</div>
+            <p>Desarrollé una aplicación SIG de mapas personalizados del estado de Hidalgo utilizando React Native, JSON y GeoJSON para visualizar datos específicos sobre población y vivienda (INEGI). Este proyecto permite a los usuarios acceder de manera detallada a información relevante sobre la región.</p>
+          </div>
+        </section>
 
-        <div className="card">
-          <h4>Aplicación SIG Hidalgo</h4>
-          <p>App en React Native con visualización GeoJSON de datos INEGI.</p>
-        </div>
-
-        <div className="card">
-          <h4>Portal Turístico Hidalgo</h4>
-          <p>Sitio institucional con noticias, eventos y mapas interactivos.</p>
-        </div>
-      </section>
-
-      <section className="contact">
-        <h3>Contacto</h3>
-        <p>Email: juarezmonroyarturo574@gmail.com</p>
-        <p>Tel: +52 773 680 2105</p>
-        <p>
-          LinkedIn: 
-          <a href="https://www.linkedin.com/in/arturo-juárez-monroy-259a28171/" target="_blank">
-            Ver perfil
-          </a>
-        </p>
-      </section>
+        <section className="education">
+          <h3>Educación</h3>
+          <div className="education-item">
+            <h4>Ingeniería en Software</h4>
+            <p>Universidad Autónoma del Estado de Hidalgo – Escuela Superior de Tlahuelilpan (2021 - 2025)</p>
+          </div>
+        </section>
+      </div>
 
       <footer>
-        © 2026 Arturo Juárez
+        © 2026 Arturo Juárez · Hecho con React
       </footer>
-
     </div>
   );
 }
