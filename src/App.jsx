@@ -6,7 +6,6 @@ function App() {
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
-    // Aplica la clase al body cuando cambia el tema
     if (theme === "dark") {
       document.body.classList.add("dark-mode");
     } else {
@@ -19,7 +18,7 @@ function App() {
       {/* Hero con botones de tema */}
       <header className="hero">
         <div className="hero-text">
-          <h1>Arturo Juárez</h1>
+          <h1>Arturo Juárez Monroy</h1>
           <h2>Licenciatura en Ingeniería de Software</h2>
           <div className="divider"></div>
           <a href="#about" className="btn">Ver mi trayectoria</a>
@@ -44,6 +43,12 @@ function App() {
 
       {/* Left column */}
       <div className="left-column">
+        {/* Foto de perfil */}
+        <div className="profile-photo">
+          <div className="photo-placeholder">
+          </div>
+        </div>
+
         <section className="contact">
           <h3>Contacto</h3>
           <p>📞 +52 773 680 2105</p>
@@ -138,7 +143,7 @@ function App() {
       </div>
 
       <footer>
-        © 2026 Arturo Juárez · Hecho con React
+        © 2026 Arturo Juárez Monroy · Hecho con React
       </footer>
     </div>
   );
