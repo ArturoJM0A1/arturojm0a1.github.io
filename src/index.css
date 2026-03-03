@@ -63,7 +63,7 @@ body.dark-mode .comment-form textarea {
   font-size: 0.95rem;
   margin: -5px 0 5px;
 }
-
+ 
 .comment-list {
   display: flex;
   flex-direction: column;

@@ -444,7 +444,7 @@ function App() {
       {/* Botón cohete para volver arriba (solo visible en escritorio y tras hacer scroll) */}
       {showRocket && (
         <div className="rocket-button" onClick={scrollToTop} role="button" tabIndex={0} aria-label="Volver arriba">
-          🚀
+            <span class="rocket">🚀</span>
         </div>
       )}
     </>
