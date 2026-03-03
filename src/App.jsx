@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import profileImg from './assets/arurophoto.jpg';
 import { db } from "./firebase.js";
-import { collection, addDoc, serverTimestamp, query, orderBy, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 // Componente de partículas (se mantiene igual)
 function Particles({ theme }) {
@@ -112,28 +112,19 @@ function Particles({ theme }) {
   return <canvas ref={canvasRef} className="particles-canvas" />;
 }
 
-// Nuevo componente de comentarios
+// Componente de comentarios modificado
 function CommentSection() {
-  const [comments, setComments] = useState([]);
+  const [submittedComment, setSubmittedComment] = useState(null);
   const [formData, setFormData] = useState({ name: "", email: "", comment: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Cargar comentarios en tiempo real
+  // Cargar comentario guardado en localStorage al montar
   useEffect(() => {
-    const q = query(collection(db, "comments"), orderBy("timestamp", "desc"));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const commentsData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setComments(commentsData);
-    }, (err) => {
-      console.error("Error al cargar comentarios:", err);
-      setError("No se pudieron cargar los comentarios.");
-    });
-
-    return () => unsubscribe();
+    const saved = localStorage.getItem('myComment');
+    if (saved) {
+      setSubmittedComment(JSON.parse(saved));
+    }
   }, []);
 
   const handleChange = (e) => {
@@ -149,12 +140,27 @@ function CommentSection() {
     setLoading(true);
     setError("");
     try {
+      // Guardar en Firebase (para que Arturo lo vea después)
       await addDoc(collection(db, "comments"), {
         name: formData.name.trim(),
         email: formData.email.trim() || null,
         comment: formData.comment.trim(),
         timestamp: serverTimestamp()
       });
+
+      // Crear objeto para guardar localmente
+      const newComment = {
+        name: formData.name.trim(),
+        email: formData.email.trim() || null,
+        comment: formData.comment.trim(),
+        timestamp: new Date().toISOString() // fecha local legible
+      };
+
+      // Guardar en localStorage y actualizar estado
+      localStorage.setItem('myComment', JSON.stringify(newComment));
+      setSubmittedComment(newComment);
+
+      // Limpiar formulario
       setFormData({ name: "", email: "", comment: "" });
     } catch (err) {
       console.error("Error al enviar comentario:", err);
@@ -199,23 +205,24 @@ function CommentSection() {
         </button>
       </form>
 
-      {/* Lista de comentarios */}
+      {/* Mensaje y comentario del usuario */}
       <div className="comment-list">
-        {comments.length === 0 ? (
-          <p className="no-comments">No hay comentarios aún. ¡Sé el primero!</p>
-        ) : (
-          comments.map((c) => (
-            <div key={c.id} className="comment-item">
+        {submittedComment ? (
+          <>
+            <p className="comment-success">¡Comentario enviado a Arturo! Gracias 😊</p>
+            <div className="comment-item">
               <div className="comment-header">
-                <strong>{c.name}</strong>
-                {c.email && <span className="comment-email">({c.email})</span>}
+                <strong>{submittedComment.name}</strong>
+                {submittedComment.email && <span className="comment-email">({submittedComment.email})</span>}
                 <span className="comment-date">
-                  {c.timestamp?.toDate?.().toLocaleString() || "Fecha no disponible"}
+                  {new Date(submittedComment.timestamp).toLocaleString()}
                 </span>
               </div>
-              <p className="comment-text">{c.comment}</p>
+              <p className="comment-text">{submittedComment.comment}</p>
             </div>
-          ))
+          </>
+        ) : (
+          <p className="no-comments">Aún no has enviado ningún comentario.</p>
         )}
       </div>
     </section>
@@ -271,7 +278,6 @@ function App() {
 
           <section className="contact">
             <h3>Contacto</h3>
-            <p>📞 +52 773 680 2105</p>
             <p>✉️ juarezmonroyarturo574@gmail.com</p>
             <p>
               🔗 <a href="https://www.linkedin.com/in/arturo-juárez-monroy-259a28171/" target="_blank" rel="noreferrer">linkedin.com/in/arturo-juárez</a>
@@ -367,7 +373,7 @@ function App() {
         </div>
 
         <footer>
-          © 2026 Arturo Juárez Monroy · Hecho con React
+          © 2026 Arturo Juárez Monroy · Hecho con React y Firebase
         </footer>
       </div>
     </>
