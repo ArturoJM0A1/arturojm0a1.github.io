@@ -1,10 +1,13 @@
+// ===== App.jsx =====
+// Mejoras: partículas más suaves, cursor typewriter, transiciones, sin alterar contenido
+
 import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import profileImg from './assets/arurophoto.jpg';
 import { db } from "./firebase.js";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-// Componente de partículas (se mantiene igual)
+// Componente de partículas mejorado (colores más integrados, menor cantidad para rendimiento)
 function Particles({ theme }) {
   const canvasRef = useRef(null);
 
@@ -13,11 +16,11 @@ function Particles({ theme }) {
     const ctx = canvas.getContext('2d');
     let animationFrameId;
     let particles = [];
-    const PARTICLE_COUNT = 56;
-    const TRAIL_LENGTH = 5;
+    const PARTICLE_COUNT = 48; // reducido para suavidad
+    const TRAIL_LENGTH = 4;
 
-    const BASE_COLOR = theme === 'dark' ? '#b08d57' : '#FFF7DB';
-    const TRAIL_COLOR = theme === 'dark' ? '176, 141, 87' : '192, 192, 192';
+    const BASE_COLOR = theme === 'dark' ? '#b08d57' : '#d4c4a8';
+    const TRAIL_COLOR = theme === 'dark' ? '176, 141, 87' : '180, 160, 120';
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -27,16 +30,16 @@ function Particles({ theme }) {
     const createParticle = () => {
       let color;
       if (theme === 'dark') {
-        color = `hsl(${42 + Math.random() * 10}, 50%, 55%)`;
+        color = `hsl(${42 + Math.random() * 15}, 55%, 55%)`;
       } else {
-        color = `hsl(0, 0%, ${70 + Math.random() * 15}%)`;
+        color = `hsl(40, 20%, ${70 + Math.random() * 15}%)`;
       }
       return {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4 + 0.1,
-        size: Math.random() * 3 + 1,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.2 + 0.1,
+        size: Math.random() * 2.5 + 1,
         trail: [],
         color,
       };
@@ -51,7 +54,7 @@ function Particles({ theme }) {
 
     const updateParticles = () => {
       particles.forEach(p => {
-        p.trail.push({ x: p.x, y: p.y, opacity: 0.8 });
+        p.trail.push({ x: p.x, y: p.y, opacity: 0.7 });
         if (p.trail.length > TRAIL_LENGTH) {
           p.trail.shift();
         }
@@ -75,16 +78,16 @@ function Particles({ theme }) {
       particles.forEach(p => {
         for (let i = 0; i < p.trail.length; i++) {
           const trailPoint = p.trail[i];
-          const opacity = (i / p.trail.length) * 0.5;
+          const opacity = (i / p.trail.length) * 0.4;
           ctx.beginPath();
-          ctx.arc(trailPoint.x, trailPoint.y, p.size * 0.7, 0, Math.PI * 2);
+          ctx.arc(trailPoint.x, trailPoint.y, p.size * 0.6, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(${TRAIL_COLOR}, ${opacity})`;
           ctx.fill();
         }
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.shadowColor = BASE_COLOR;
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 12;
         ctx.fillStyle = p.color;
         ctx.fill();
         ctx.shadowBlur = 0;
@@ -112,7 +115,7 @@ function Particles({ theme }) {
   return <canvas ref={canvasRef} className="particles-canvas" />;
 }
 
-// Componente de comentarios (se mantiene igual)
+// Componente de comentarios (sin cambios funcionales)
 function CommentSection() {
   const [submittedComment, setSubmittedComment] = useState(null);
   const [formData, setFormData] = useState({ name: "", email: "", comment: "" });
@@ -223,7 +226,6 @@ function CommentSection() {
 
 function App() {
   const [theme, setTheme] = useState("dark");
-  // Estado para el efecto typewriter
   const [displayText, setDisplayText] = useState("");
   const fullText = "Ingeniería de Software";
 
@@ -235,10 +237,10 @@ function App() {
     }
   }, [theme]);
 
-  // Efecto typewriter
+  // Efecto typewriter (mismo contenido, velocidad ligeramente aumentada)
   useEffect(() => {
     let i = 0;
-    setDisplayText(""); // Reiniciar por si acaso
+    setDisplayText("");
     const interval = setInterval(() => {
       if (i < fullText.length) {
         setDisplayText(fullText.substring(0, i + 1));
@@ -246,18 +248,18 @@ function App() {
       } else {
         clearInterval(interval);
       }
-    }, 100); // Velocidad de escritura (100ms por letra)
+    }, 90); // un poco más rápido
 
     return () => clearInterval(interval);
-  }, []); // Solo al montar
+  }, []);
 
   return (
     <>
       <Particles theme={theme} />
-      {/* AÑADIDO: Icono de sol o luna según el tema */}
-      <div className={`theme-icon ${theme}`}>
+      <div className={`theme-icon ${theme} icon-style-aesthetic-adjustment`}>
         {theme === 'dark' ? '🌙' : '☀️'}
       </div>
+
 
       <title>Arturo Juárez Monroy</title>
 
@@ -265,7 +267,7 @@ function App() {
         <header className="hero">
           <div className="hero-text">
             <h1>Arturo Juárez Monroy</h1>
-            <h2>{displayText}</h2> {/* Texto con efecto typewriter */}
+            <h2>{displayText}</h2> {/* El cursor se añade con CSS pseudo-elemento */}
             <div className="divider"></div>
             <a href="#about" className="btn">Ver mi trayectoria</a>
           </div>
@@ -331,8 +333,7 @@ function App() {
                   <li>Vue</li>
                   <li>Tailwind CSS</li>
                   <li>Bootstrap</li>
-                  <li>MySQL
-                  </li>
+                  <li>MySQL</li>
                 </ul>
               </div>
             </div>
@@ -395,7 +396,6 @@ function App() {
           </section>
         </div>
 
-        {/* Sección de comentarios (ocupa ambas columnas) */}
         <div className="comments-wrapper">
           <CommentSection />
         </div>
