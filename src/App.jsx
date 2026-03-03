@@ -112,14 +112,13 @@ function Particles({ theme }) {
   return <canvas ref={canvasRef} className="particles-canvas" />;
 }
 
-// Componente de comentarios modificado
+// Componente de comentarios (se mantiene igual)
 function CommentSection() {
   const [submittedComment, setSubmittedComment] = useState(null);
   const [formData, setFormData] = useState({ name: "", email: "", comment: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Cargar comentario guardado en localStorage al montar
   useEffect(() => {
     const saved = localStorage.getItem('myComment');
     if (saved) {
@@ -140,7 +139,6 @@ function CommentSection() {
     setLoading(true);
     setError("");
     try {
-      // Guardar en Firebase (para que Arturo lo vea después)
       await addDoc(collection(db, "comments"), {
         name: formData.name.trim(),
         email: formData.email.trim() || null,
@@ -148,19 +146,15 @@ function CommentSection() {
         timestamp: serverTimestamp()
       });
 
-      // Crear objeto para guardar localmente
       const newComment = {
         name: formData.name.trim(),
         email: formData.email.trim() || null,
         comment: formData.comment.trim(),
-        timestamp: new Date().toISOString() // fecha local legible
+        timestamp: new Date().toISOString()
       };
 
-      // Guardar en localStorage y actualizar estado
       localStorage.setItem('myComment', JSON.stringify(newComment));
       setSubmittedComment(newComment);
-
-      // Limpiar formulario
       setFormData({ name: "", email: "", comment: "" });
     } catch (err) {
       console.error("Error al enviar comentario:", err);
@@ -174,7 +168,6 @@ function CommentSection() {
     <section className="comments">
       <h3>Comentarios</h3>
 
-      {/* Formulario */}
       <form onSubmit={handleSubmit} className="comment-form">
         <input
           type="text"
@@ -205,7 +198,6 @@ function CommentSection() {
         </button>
       </form>
 
-      {/* Mensaje y comentario del usuario */}
       <div className="comment-list">
         {submittedComment ? (
           <>
@@ -231,6 +223,9 @@ function CommentSection() {
 
 function App() {
   const [theme, setTheme] = useState("dark");
+  // Estado para el efecto typewriter
+  const [displayText, setDisplayText] = useState("");
+  const fullText = "Ingeniería de Software";
 
   useEffect(() => {
     if (theme === "dark") {
@@ -239,6 +234,22 @@ function App() {
       document.body.classList.remove("dark-mode");
     }
   }, [theme]);
+
+  // Efecto typewriter
+  useEffect(() => {
+    let i = 0;
+    setDisplayText(""); // Reiniciar por si acaso
+    const interval = setInterval(() => {
+      if (i < fullText.length) {
+        setDisplayText(fullText.substring(0, i + 1));
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 100); // Velocidad de escritura (100ms por letra)
+
+    return () => clearInterval(interval);
+  }, []); // Solo al montar
 
   return (
     <>
@@ -249,7 +260,7 @@ function App() {
         <header className="hero">
           <div className="hero-text">
             <h1>Arturo Juárez Monroy</h1>
-            <h2>Ingeniería de Software</h2>
+            <h2>{displayText}</h2> {/* Texto con efecto typewriter */}
             <div className="divider"></div>
             <a href="#about" className="btn">Ver mi trayectoria</a>
           </div>
@@ -282,9 +293,8 @@ function App() {
             <p>
               🔗 <a href="https://www.linkedin.com/in/arturo-juárez-monroy-259a28171/" target="_blank" rel="noreferrer">linkedin.com/in/arturo-juárez</a>
             </p>
-
             <p>
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                 <polygon points="10 8 16 12 10 16 10 8"></polygon>
               </svg>
