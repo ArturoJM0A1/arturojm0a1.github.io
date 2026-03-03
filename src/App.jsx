@@ -141,6 +141,8 @@ function App() {
   return (
     <>
       <Particles theme={theme} />
+          <title>Arturo Juárez Monroy</title> 
+
       <div className="container">
         <header className="hero">
           <div className="hero-text">
