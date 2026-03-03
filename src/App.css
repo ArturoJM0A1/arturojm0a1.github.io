@@ -239,8 +239,8 @@ body.dark-mode .theme-btn:hover {
 }
 
 .photo-placeholder {
-  width: 187px;
-  height: 187px;
+  width: 190px;
+  height: 190px;
   border-radius: 50%;
   background-color: #e0e0e0;
   border: 4px solid #b08d57;
@@ -263,9 +263,10 @@ body.dark-mode .theme-btn:hover {
 }
 
 .photo-placeholder:hover {
-  transform: scale(1.07) rotate(-3deg);
   box-shadow: 0 12px 28px rgba(176, 141, 87, 0.4);
-  border-radius: 74% 26% 78% 22% / 21% 68% 32% 79% ;
+  border-radius: 74% 26% 78% 22% / 21% 68% 32% 79%;
+  filter: brightness(1.07);
+  transform: scale(1.065) rotate(-3deg) translate(8px, 0px) skewX(0deg);
 }
 
 body.dark-mode .photo-placeholder {
@@ -438,10 +439,12 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateY(-80px);
   }
+
   70% {
     opacity: 1;
     transform: translateY(10px);
   }
+
   100% {
     transform: translateY(0);
   }
@@ -452,6 +455,7 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -463,6 +467,7 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateX(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -474,6 +479,7 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateX(20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -485,6 +491,7 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -495,6 +502,7 @@ body.dark-mode footer {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -504,6 +512,7 @@ body.dark-mode footer {
   from {
     width: 0;
   }
+
   to {
     width: 80px;
   }
