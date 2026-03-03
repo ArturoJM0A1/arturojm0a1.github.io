@@ -1,6 +1,7 @@
 /* App.css */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:wght@300;400;600&display=swap');
 
+
 * {
   margin: 0;
   padding: 0;
@@ -96,7 +97,8 @@ body.dark-mode footer {
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* Permite hacer clic a través del canvas */
+  pointer-events: none;
+  /* Permite hacer clic a través del canvas */
   z-index: 0;
 }
 
@@ -258,11 +260,13 @@ body.dark-mode .theme-btn:hover {
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 100;
+  border-radius: 81% 19% 86% 14% / 14% 72% 28% 86%;
 }
 
 .photo-placeholder:hover {
-  transform: scale(1.05) rotate(2deg);
+  transform: scale(1.07) rotate(-3deg);
   box-shadow: 0 12px 28px rgba(176, 141, 87, 0.4);
+  border-radius: 74% 26% 78% 22% / 21% 68% 32% 79% ;
 }
 
 body.dark-mode .photo-placeholder {
@@ -421,7 +425,7 @@ footer {
   padding-top: 20px;
   border-top: 1px solid #eaeaea;
   font-size: 1rem;
-  color: #999;
+  color: #c7c7c7;
   animation: fadeIn 1s ease-out;
 }
 
@@ -435,6 +439,7 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -446,6 +451,7 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateX(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -457,6 +463,7 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateX(20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -468,6 +475,7 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -478,6 +486,7 @@ body.dark-mode footer {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -487,6 +496,7 @@ body.dark-mode footer {
   from {
     width: 0;
   }
+
   to {
     width: 80px;
   }

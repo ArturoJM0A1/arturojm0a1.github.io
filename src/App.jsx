@@ -13,7 +13,7 @@ function Particles({ theme }) {
     const ctx = canvas.getContext('2d');
     let animationFrameId;
     let particles = [];
-    const PARTICLE_COUNT = 60;
+    const PARTICLE_COUNT = 56;
     const TRAIL_LENGTH = 5;
 
     const BASE_COLOR = theme === 'dark' ? '#b08d57' : '#FFF7DB';
@@ -249,7 +249,7 @@ function App() {
         <header className="hero">
           <div className="hero-text">
             <h1>Arturo Juárez Monroy</h1>
-            <h2>Licenciatura en Ingeniería de Software</h2>
+            <h2>Ingeniería de Software</h2>
             <div className="divider"></div>
             <a href="#about" className="btn">Ver mi trayectoria</a>
           </div>
@@ -281,6 +281,14 @@ function App() {
             <p>✉️ juarezmonroyarturo574@gmail.com</p>
             <p>
               🔗 <a href="https://www.linkedin.com/in/arturo-juárez-monroy-259a28171/" target="_blank" rel="noreferrer">linkedin.com/in/arturo-juárez</a>
+            </p>
+
+            <p>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+              </svg>
+              <a href="https://www.youtube.com/@arturojuarezmonroy3951" target="_blank" rel="noreferrer">Youtube.com/@arturojuarezmonroy3951</a>
             </p>
           </section>
 
@@ -373,7 +381,7 @@ function App() {
         </div>
 
         <footer>
-          © 2026 Arturo Juárez Monroy · Hecho con React y Firebase
+          <b>© 2026 Arturo Juárez Monroy · Hecho con React y Firebase</b>
         </footer>
       </div>
     </>
