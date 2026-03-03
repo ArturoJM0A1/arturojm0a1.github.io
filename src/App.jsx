@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import profileImg from './assets/arurophoto.jpg';
+import { db } from "./firebase";
+import { collection, addDoc, serverTimestamp, query, orderBy, onSnapshot } from "firebase/firestore";
 
-// Componente de partículas (integrado directamente)
+// Componente de partículas (se mantiene igual)
 function Particles({ theme }) {
   const canvasRef = useRef(null);
 
@@ -12,11 +14,10 @@ function Particles({ theme }) {
     let animationFrameId;
     let particles = [];
     const PARTICLE_COUNT = 60;
-    const TRAIL_LENGTH = 5; // longitud de la estela
+    const TRAIL_LENGTH = 5;
 
-    // Colores según el tema
-    const BASE_COLOR = theme === 'dark' ? '#b08d57' : '#FFF7DB'; 
-    const TRAIL_COLOR = theme === 'dark' ? '176, 141, 87' : '192, 192, 192'; // valores RGB para la estela
+    const BASE_COLOR = theme === 'dark' ? '#b08d57' : '#FFF7DB';
+    const TRAIL_COLOR = theme === 'dark' ? '176, 141, 87' : '192, 192, 192';
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -26,17 +27,15 @@ function Particles({ theme }) {
     const createParticle = () => {
       let color;
       if (theme === 'dark') {
-        // Tonos dorados para modo oscuro
         color = `hsl(${42 + Math.random() * 10}, 50%, 55%)`;
       } else {
-        // Tonos grises claros para modo claro (luminosidad entre 70% y 85%)
         color = `hsl(0, 0%, ${70 + Math.random() * 15}%)`;
       }
       return {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4 + 0.1, // ligera tendencia hacia abajo
+        vy: (Math.random() - 0.5) * 0.4 + 0.1,
         size: Math.random() * 3 + 1,
         trail: [],
         color,
@@ -52,19 +51,13 @@ function Particles({ theme }) {
 
     const updateParticles = () => {
       particles.forEach(p => {
-        // Guardar posición actual en el trail
         p.trail.push({ x: p.x, y: p.y, opacity: 0.8 });
         if (p.trail.length > TRAIL_LENGTH) {
           p.trail.shift();
         }
-
-        // Actualizar posición
         p.x += p.vx;
         p.y += p.vy;
-
-        // Rebote suave en los bordes (con reinicio aleatorio para efecto continuo)
         if (p.x < 0 || p.x > canvas.width || p.y < 0 || p.y > canvas.height) {
-          // Reiniciar la partícula en un borde aleatorio
           if (Math.random() > 0.5) {
             p.x = Math.random() * canvas.width;
             p.y = 0;
@@ -79,27 +72,21 @@ function Particles({ theme }) {
 
     const drawParticles = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       particles.forEach(p => {
-        // Dibujar estela (de más antigua a más nueva)
         for (let i = 0; i < p.trail.length; i++) {
           const trailPoint = p.trail[i];
-          const opacity = (i / p.trail.length) * 0.5; // opacidad creciente hacia la cabeza
+          const opacity = (i / p.trail.length) * 0.5;
           ctx.beginPath();
           ctx.arc(trailPoint.x, trailPoint.y, p.size * 0.7, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(${TRAIL_COLOR}, ${opacity})`;
           ctx.fill();
         }
-
-        // Dibujar cabeza de la partícula (más brillante)
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        // Pequeño resplandor del color base
         ctx.shadowColor = BASE_COLOR;
         ctx.shadowBlur = 10;
         ctx.fillStyle = p.color;
         ctx.fill();
-        // Resetear sombra para no afectar a las siguientes partículas
         ctx.shadowBlur = 0;
       });
     };
@@ -110,21 +97,129 @@ function Particles({ theme }) {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    // Configuración inicial
     resizeCanvas();
     initParticles();
     animate();
 
-    // Manejar resize
     window.addEventListener('resize', resizeCanvas);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [theme]); // Recrear las partículas cuando cambia el tema
+  }, [theme]);
 
   return <canvas ref={canvasRef} className="particles-canvas" />;
+}
+
+// Nuevo componente de comentarios
+function CommentSection() {
+  const [comments, setComments] = useState([]);
+  const [formData, setFormData] = useState({ name: "", email: "", comment: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  // Cargar comentarios en tiempo real
+  useEffect(() => {
+    const q = query(collection(db, "comments"), orderBy("timestamp", "desc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const commentsData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setComments(commentsData);
+    }, (err) => {
+      console.error("Error al cargar comentarios:", err);
+      setError("No se pudieron cargar los comentarios.");
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.name.trim() || !formData.comment.trim()) {
+      setError("El nombre y el comentario son obligatorios.");
+      return;
+    }
+    setLoading(true);
+    setError("");
+    try {
+      await addDoc(collection(db, "comments"), {
+        name: formData.name.trim(),
+        email: formData.email.trim() || null,
+        comment: formData.comment.trim(),
+        timestamp: serverTimestamp()
+      });
+      setFormData({ name: "", email: "", comment: "" });
+    } catch (err) {
+      console.error("Error al enviar comentario:", err);
+      setError("Hubo un error al enviar el comentario.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <section className="comments">
+      <h3>Comentarios</h3>
+
+      {/* Formulario */}
+      <form onSubmit={handleSubmit} className="comment-form">
+        <input
+          type="text"
+          name="name"
+          placeholder="Tu nombre *"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Correo electrónico (opcional)"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <textarea
+          name="comment"
+          placeholder="Escribe tu comentario *"
+          rows="3"
+          value={formData.comment}
+          onChange={handleChange}
+          required
+        />
+        {error && <p className="comment-error">{error}</p>}
+        <button type="submit" className="btn" disabled={loading}>
+          {loading ? "Enviando..." : "Enviar comentario"}
+        </button>
+      </form>
+
+      {/* Lista de comentarios */}
+      <div className="comment-list">
+        {comments.length === 0 ? (
+          <p className="no-comments">No hay comentarios aún. ¡Sé el primero!</p>
+        ) : (
+          comments.map((c) => (
+            <div key={c.id} className="comment-item">
+              <div className="comment-header">
+                <strong>{c.name}</strong>
+                {c.email && <span className="comment-email">({c.email})</span>}
+                <span className="comment-date">
+                  {c.timestamp?.toDate?.().toLocaleString() || "Fecha no disponible"}
+                </span>
+              </div>
+              <p className="comment-text">{c.comment}</p>
+            </div>
+          ))
+        )}
+      </div>
+    </section>
+  );
 }
 
 function App() {
@@ -141,7 +236,7 @@ function App() {
   return (
     <>
       <Particles theme={theme} />
-          <title>Arturo Juárez Monroy</title> 
+      <title>Arturo Juárez Monroy</title>
 
       <div className="container">
         <header className="hero">
@@ -264,6 +359,11 @@ function App() {
               <p>Universidad Autónoma del Estado de Hidalgo – Escuela Superior de Tlahuelilpan (2021 - 2025)</p>
             </div>
           </section>
+        </div>
+
+        {/* Sección de comentarios (ocupa ambas columnas) */}
+        <div className="comments-wrapper">
+          <CommentSection />
         </div>
 
         <footer>
