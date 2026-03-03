@@ -16,7 +16,7 @@ function Particles({ theme }) {
     const ctx = canvas.getContext('2d');
     let animationFrameId;
     let particles = [];
-    const PARTICLE_COUNT = 48; // reducido para suavidad
+    const PARTICLE_COUNT = 97; 
     const TRAIL_LENGTH = 4;
 
     const BASE_COLOR = theme === 'dark' ? '#b08d57' : '#d4c4a8';
@@ -227,7 +227,7 @@ function CommentSection() {
 function App() {
   const [theme, setTheme] = useState("dark");
   const [displayText, setDisplayText] = useState("");
-  const fullText = "Ingeniería de Software";
+  const fullText = "Ingeniería en Software";
 
   useEffect(() => {
     if (theme === "dark") {
@@ -248,7 +248,7 @@ function App() {
       } else {
         clearInterval(interval);
       }
-    }, 90); // un poco más rápido
+    }, 119); // velocidad
 
     return () => clearInterval(interval);
   }, []);
