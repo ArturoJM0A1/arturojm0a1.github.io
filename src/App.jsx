@@ -312,10 +312,13 @@ function App() {
                   <li>HTML</li>
                   <li>Python</li>
                   <li>PHP</li>
+                  <li>Java</li>
+                  <li>C++ / C</li>
+                  <li>SQL</li>
                 </ul>
               </div>
               <div>
-                <h4>Frameworks / Librerías</h4>
+                <h4>Frameworks / Librerías / Otros</h4>
                 <ul>
                   <li>React</li>
                   <li>React Native</li>
@@ -323,6 +326,8 @@ function App() {
                   <li>Vue</li>
                   <li>Tailwind CSS</li>
                   <li>Bootstrap</li>
+                  <li>MySQL
+                  </li>
                 </ul>
               </div>
             </div>
@@ -380,7 +385,7 @@ function App() {
             <h3>Educación</h3>
             <div className="education-item">
               <h4>Ingeniería en Software</h4>
-              <p>Universidad Autónoma del Estado de Hidalgo – Escuela Superior de Tlahuelilpan (2021 - 2025)</p>
+              <p>Universidad Autónoma del Estado de Hidalgo – Escuela Superior de Tlahuelilpan (2021 - 2024)</p>
             </div>
           </section>
         </div>
@@ -391,7 +396,7 @@ function App() {
         </div>
 
         <footer>
-          <b>© 2026 Arturo Juárez Monroy · Hecho con React y Firebase</b>
+          <b>© Arturo Juárez Monroy · Hecho con React y Firebase</b>
         </footer>
       </div>
     </>
