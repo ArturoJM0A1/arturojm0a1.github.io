@@ -1,7 +1,6 @@
 /* App.css */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:wght@300;400;600&display=swap');
 
-
 * {
   margin: 0;
   padding: 0;
@@ -98,7 +97,6 @@ body.dark-mode footer {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  /* Permite hacer clic a través del canvas */
   z-index: 0;
 }
 
@@ -125,7 +123,6 @@ body.dark-mode footer {
   border-bottom: 2px solid #b08d57;
   padding-bottom: 20px;
   margin-bottom: 20px;
-  animation: fadeInDown 0.8s ease-out;
 }
 
 .hero-text h1 {
@@ -135,6 +132,8 @@ body.dark-mode footer {
   margin-bottom: 5px;
   letter-spacing: 2px;
   color: #1a1a1a;
+  /* Nueva animación específica para el nombre */
+  animation: dropIn 0.9s cubic-bezier(0.12, 0.71, 0.33, 1) forwards;
 }
 
 body.dark-mode .hero-text h1 {
@@ -240,8 +239,8 @@ body.dark-mode .theme-btn:hover {
 }
 
 .photo-placeholder {
-  width: 180px;
-  height: 180px;
+  width: 187px;
+  height: 187px;
   border-radius: 50%;
   background-color: #e0e0e0;
   border: 4px solid #b08d57;
@@ -434,12 +433,25 @@ body.dark-mode footer {
 }
 
 /* Animaciones */
+@keyframes dropIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 @keyframes fadeInDown {
   from {
     opacity: 0;
     transform: translateY(-20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -451,7 +463,6 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateX(-20px);
   }
-
   to {
     opacity: 1;
     transform: translateX(0);
@@ -463,7 +474,6 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateX(20px);
   }
-
   to {
     opacity: 1;
     transform: translateX(0);
@@ -475,7 +485,6 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -486,7 +495,6 @@ body.dark-mode footer {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
@@ -496,7 +504,6 @@ body.dark-mode footer {
   from {
     width: 0;
   }
-
   to {
     width: 80px;
   }
