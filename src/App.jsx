@@ -328,6 +328,7 @@ function App() {
                 <h4>Frameworks / Librerías / Otros</h4>
                 <ul>
                   <li>React</li>
+                  <li>Next.js</li>
                   <li>React Native</li>
                   <li>Firebase</li>
                   <li>Vue</li>
@@ -335,6 +336,8 @@ function App() {
                   <li>Bootstrap</li>
                   <li>MySQL</li>
                   <li>WordPress </li>
+                  <li>3ds Max </li>
+                  <li>AutoCAD </li>
                   <li>Excel </li>
                 </ul>
               </div>
