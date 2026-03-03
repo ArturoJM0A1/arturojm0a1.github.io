@@ -87,7 +87,6 @@ body.dark-mode footer {
   width: 12px;
   height: 12px;
   overflow-x: hidden;
-
 }
 
 ::-webkit-scrollbar-track {
@@ -149,13 +148,10 @@ body.dark-mode footer {
   scale: 0.9;
 }
 
-
-
 @keyframes float {
   0% {
     transform: translateY(0px);
   }
-
   100% {
     transform: translateY(-15px);
   }
@@ -245,14 +241,10 @@ body.dark-mode .hero-text h1 {
 }
 
 @keyframes blink {
-
-  0%,
-  50% {
+  0%, 50% {
     opacity: 1;
   }
-
-  51%,
-  100% {
+  51%, 100% {
     opacity: 0;
   }
 }
@@ -300,7 +292,7 @@ body.dark-mode .hero-text h1 {
   border-radius: 2px;
 }
 
-.vermitrayectoria{
+.vermitrayectoria {
   margin-bottom: 23px;
 }
 
@@ -421,13 +413,7 @@ body.dark-mode .hero-text h1 {
   border-bottom-color: var(--gold-light);
 }
 
-/* Skills */
-.skills-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-}
-
+/* Skills - nueva estructura flexible */
 .skills h4 {
   font-family: 'Cinzel', serif;
   color: var(--gold);
@@ -459,6 +445,23 @@ body.dark-mode .hero-text h1 {
   left: 0;
   font-size: 1.3rem;
   line-height: 1;
+}
+
+/* Contenedor de habilidades técnicas en dos columnas flexibles */
+.skills-row {
+  display: flex;
+  gap: 30px;
+}
+
+.skills-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skills-right {
+  flex: 1;
 }
 
 /* Tarjetas de proyecto */
@@ -572,12 +575,10 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateY(-80px);
   }
-
   70% {
     opacity: 1;
     transform: translateY(10px);
   }
-
   100% {
     transform: translateY(0);
   }
@@ -587,7 +588,6 @@ body.dark-mode footer {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
@@ -597,7 +597,6 @@ body.dark-mode footer {
   from {
     width: 0;
   }
-
   to {
     width: 100px;
   }
@@ -608,7 +607,6 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateX(-30px);
   }
-
   to {
     opacity: 1;
     transform: translateX(0);
@@ -620,7 +618,6 @@ body.dark-mode footer {
     opacity: 0;
     transform: translateX(30px);
   }
-
   to {
     opacity: 1;
     transform: translateX(0);
@@ -660,6 +657,11 @@ body.dark-mode footer {
     width: 180px;
     height: 180px;
   }
+
+  /* En móvil, las habilidades técnicas se apilan */
+  .skills-row {
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 600px) {
@@ -673,11 +675,6 @@ body.dark-mode footer {
 
   .hero-text h2 {
     font-size: 1.5rem;
-  }
-
-  .skills-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
   }
 
   .btn {

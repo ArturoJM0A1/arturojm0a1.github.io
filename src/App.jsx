@@ -260,7 +260,6 @@ function App() {
         {theme === 'dark' ? '🌙' : '☀️'}
       </div>
 
-
       <title>Arturo Juárez Monroy</title>
 
       <div className="container">
@@ -311,35 +310,44 @@ function App() {
 
           <section className="skills">
             <h3>Habilidades Técnicas</h3>
-            <div className="skills-grid">
-              <div>
-                <h4>Lenguajes</h4>
-                <ul>
-                  <li>JavaScript</li>
-                  <li>HTML</li>
-                  <li>Python</li>
-                  <li>PHP</li>
-                  <li>Java</li>
-                  <li>C++ / C</li>
-                  <li>SQL</li>
-                </ul>
+            <div className="skills-row">
+              <div className="skills-left">
+                <div className="skill-category">
+                  <h4>Lenguajes</h4>
+                  <ul>
+                    <li>JavaScript</li>
+                    <li>HTML</li>
+                    <li>Python</li>
+                    <li>PHP</li>
+                    <li>Java</li>
+                    <li>C++ / C</li>
+                    <li>SQL</li>
+                  </ul>
+                </div>
+                <div className="skill-category">
+                  <h4>Otros</h4>
+                  <ul>
+                    <li>WordPress</li>
+                    <li>3ds Max</li>
+                    <li>AutoCAD</li>
+                    <li>Excel</li>
+                  </ul>
+                </div>
               </div>
-              <div>
-                <h4>Frameworks / Librerías / Otros</h4>
-                <ul>
-                  <li>React</li>
-                  <li>Next.js</li>
-                  <li>React Native</li>
-                  <li>Firebase</li>
-                  <li>Vue</li>
-                  <li>Tailwind CSS</li>
-                  <li>Bootstrap</li>
-                  <li>MySQL</li>
-                  <li>WordPress </li>
-                  <li>3ds Max </li>
-                  <li>AutoCAD </li>
-                  <li>Excel </li>
-                </ul>
+              <div className="skills-right">
+                <div className="skill-category">
+                  <h4>Frameworks / Librerías</h4>
+                  <ul>
+                    <li>React</li>
+                    <li>Next.js</li>
+                    <li>React Native</li>
+                    <li>Firebase</li>
+                    <li>Vue</li>
+                    <li>Tailwind CSS</li>
+                    <li>Bootstrap</li>
+                    <li>MySQL</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </section>
