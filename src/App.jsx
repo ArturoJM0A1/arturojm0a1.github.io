@@ -3,6 +3,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import "./App.css";
+import "./cohetegoup.css";
 import profileImg from './assets/arurophoto.jpg';
 import { db } from "./firebase.js";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
