@@ -734,8 +734,14 @@ body.dark-mode footer {
     right: 2px;
   }
 
-  .rocket{
+  .rocket {
     margin-top: 9px;
+      transition: transform 0.3s ease;
+
+  }
+
+  .rocket-button:hover .rocket {
+    margin-left: 2px;
   }
 }
 
