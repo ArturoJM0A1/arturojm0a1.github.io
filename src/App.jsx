@@ -1,14 +1,12 @@
 // ===== App.jsx =====
-// Mejoras: partículas con nueva colorimetría + botón cohete para scroll
+// Mejoras: partículas con nueva colorimetría + botón cohete para scroll + botones de proyecto con Font Awesome
 
 import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import "./cohetegoup.css";
 import profileImg from './assets/arurophoto.jpg';
-import "./App.css";
 import Particles from "./particulasfondo.jsx";
 import CommentSection from "./CommentSection.jsx";
-
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -186,30 +184,47 @@ function App() {
               <h4>Pirámides de Tula con A‑Frame</h4>
               <div className="date">Trabajo escolar · 2023</div>
               <p>Usando la etiqueta A‑Frame para mostrar el lugar. El resultado fue un proyecto atractivo y detallado, destacando por su cuidado en la presentación.</p>
+              <div className="project-links">
+                <a href="https://github.com/ArturoJM0A1/tollan-a-frame" className="project-link" target="_blank" rel="noreferrer" title="Ver repositorio"><i className="fab fa-github"></i> Repo</a>
+                <a href="https://youtu.be/TGilgQixh2I?si=LMujicSgD7mOZh7y" className="project-link" target="_blank" rel="noreferrer" title="Ver video"><i className="fas fa-video"></i> Video</a>
+              </div>
             </div>
 
             <div className="card">
               <h4>Sitio Web del bar "El Mezcalito"</h4>
               <div className="date">Proyecto independiente · 2023</div>
               <p>Desarrollé un sitio web utilizando PHP y Bootstrap para el bar "El Mezcalito" en Tula de Allende. El sitio permitía a los usuarios explorar el establecimiento, visualizar la variedad de bebidas y comidas disponibles y realizar reservaciones de manera conveniente y eficiente.</p>
+              <div className="project-links">
+                <a href="https://github.com/ArturoJM0A1/El-Mezcalito" className="project-link" target="_blank" rel="noreferrer" title="Ver repositorio"><i className="fab fa-github"></i> Repo</a>
+              </div>
             </div>
 
             <div className="card">
               <h4>Portal Turístico de Hidalgo</h4>
               <div className="date">Gobierno del Estado de Hidalgo · 2024</div>
               <p>Desarrollé un sitio web para la Secretaría de Turismo en Hidalgo para ofrecer a los visitantes una experiencia completa. El sitio incluye noticias, eventos y actividades turísticas, un calendario de eventos, mapas interactivos de lugares interesantes y filtros de navegación.</p>
+              <div className="project-links">
+                <a href="https://github.com/ArturoJM0A1/sitioturismo" className="project-link" target="_blank" rel="noreferrer" title="Ver repositorio"><i className="fab fa-github"></i> Repo</a>
+              </div>
             </div>
 
             <div className="card">
               <h4>Aplicación de Mapas Personalizados (SIG Hidalgo)</h4>
               <div className="date">Trabajo para titulación · 2025</div>
               <p>Desarrollé una aplicación SIG de mapas personalizados del estado de Hidalgo utilizando React Native, JSON y GeoJSON para visualizar datos específicos sobre población y vivienda (INEGI). Este proyecto permite a los usuarios acceder de manera detallada a información relevante sobre la región.</p>
+              <div className="project-links">
+                <a href="https://ciencialatina.org/index.php/cienciala/article/view/19604/28102" className="project-link" target="_blank" rel="noreferrer" title="Ver articulo"><i className="fas fa-book"></i> Articulo</a>
+              </div>
             </div>
 
             <div className="card">
               <h4>Chat con IA Local (Ollama + Next.js)</h4>
               <div className="date">Aplicación Web Full Stack · 2026</div>
               <p>Desarrollo de chat local con Next.js, integrada con Ollama para ejecutar el modelo llama3.2:1b en entorno local, implementando API propia, manejo de estado en React y diseño responsive con Tailwind CSS, permitiendo interacción en tiempo real sin dependencia de servicios en la nube.</p>
+              <div className="project-links">
+                <a href="https://github.com/ArturoJM0A1/chatbotollama" className="project-link" target="_blank" rel="noreferrer" title="Ver repositorio"><i className="fab fa-github"></i> Repo</a>
+                <a href="https://youtu.be/xPE52ITnEyg?si=S0bAwIU81MfOBqzl" className="project-link" target="_blank" rel="noreferrer" title="Ver video"><i className="fas fa-video"></i> Video</a>
+              </div>
             </div>
           </section>
 
@@ -234,7 +249,7 @@ function App() {
       {/* Botón cohete para volver arriba (solo visible en escritorio y tras hacer scroll) */}
       {showRocket && (
         <div className="rocket-button" onClick={scrollToTop} role="button" tabIndex={0} aria-label="Volver arriba">
-          <span class="rocket">🚀</span>
+          <span className="rocket">🚀</span>
         </div>
       )}
     </>

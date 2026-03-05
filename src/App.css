@@ -733,3 +733,51 @@ body.dark-mode footer {
     text-align: center;
   }
 }
+
+
+/* ===== Estilos para los botones de proyecto ===== */
+.project-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: transparent;
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  font-family: var(--font-tech);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 40px;
+  transition: var(--transition);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+.project-link i {
+  font-size: 1.1rem;
+}
+
+.project-link:hover {
+  background-color: var(--primary);
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-glow);
+}
+
+body.dark-mode .project-link {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+body.dark-mode .project-link:hover {
+  background-color: var(--primary);
+  color: var(--bg-dark);
+}
