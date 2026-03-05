@@ -21,6 +21,8 @@
   backdrop-filter: blur(4px);
   border: 2px solid rgba(255, 255, 255, 0.2);
   scale: 0.92;
+
+  overflow: visible;
 }
 
 .rocket-button:hover {
@@ -49,6 +51,9 @@
 
   transform: scale(0.99) rotate(0deg);
   transition: transform 0.3s ease;
+
+    overflow: visible;
+
 }
 
 .rocket-button:hover .rocket {
@@ -79,21 +84,23 @@
 .rocket-button:hover .rocket::before {
   content: '';
   position: absolute;
-  margin-top: -7px;
+  margin-top: -8px;
   bottom: -4px;
   /* justo debajo del cohete */
-  width: 7px;
+  width: 9px;
   /* ancho del fuego */
-  height: 20px;
+  height: 22px;
   /* altura inicial */
-  background: linear-gradient(to bottom, #ffff66, #ff9900, #ff3300, #ff9900);
+  background: linear-gradient(to bottom, #8f8f8f, #aeaeae, #bfbfbf, #a9a9a9);
 
   border-radius: 50% 50% 50% 50%;
   animation: fire-straight 0.4s infinite alternate;
-  filter: blur(1px);
+  filter: blur(2px);
 
   left: -2px;
   z-index: 4;
+
+  transform: rotate(206deg);
 }
 
 /* Animación vertical sin inclinar */
