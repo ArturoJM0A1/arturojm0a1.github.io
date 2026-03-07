@@ -225,6 +225,8 @@ function App() {
               <p>Desarrollé una aplicación SIG de mapas personalizados del estado de Hidalgo utilizando React Native, JSON y GeoJSON para visualizar datos específicos sobre población y vivienda (INEGI). Este proyecto permite a los usuarios acceder de manera detallada a información relevante sobre la región.</p>
               <div className="project-links">
                 <a href="https://ciencialatina.org/index.php/cienciala/article/view/19604/28102" className="project-link" target="_blank" rel="noreferrer" title="Ver articulo"><i className="fas fa-book"></i> Articulo</a>
+                <a href="https://github.com/ArturoJM0A1/HidalgoHorizon" className="project-link" target="_blank" rel="noreferrer" title="Ver repositorio"><i className="fab fa-github"></i> Repo</a>
+                <a href="https://youtu.be/avluPyj1kDg?si=-0tT1EwEOKFTSiDX" className="project-link" target="_blank" rel="noreferrer" title="Ver video"><i className="fas fa-video"></i> Video</a>
               </div>
             </div>
 
