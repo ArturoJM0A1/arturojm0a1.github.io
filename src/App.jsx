@@ -1,7 +1,7 @@
-// ===== App.jsx =====
+﻿// ===== App.jsx =====
 // Mejoras: partículas con nueva colorimetría + botón cohete para scroll + botones de proyecto con Font Awesome
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import "./App.css";
 import "./cohetegoup.css";
 import profileImg from './assets/arurophoto.jpg';
@@ -9,7 +9,8 @@ import Particles from "./particulasfondo.jsx";
 import CommentSection from "./CommentSection.jsx";
 
 function App() {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("dark"); // Tema inicial oscuro
+  const [showWelcome, setShowWelcome] = useState(true);
   const [displayText, setDisplayText] = useState("");
   const fullText = "Ingeniería en Software";
 
@@ -33,7 +34,8 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  useEffect(() => {
+  // Aplicar la clase del tema de forma síncrona para evitar parpadeos
+  useLayoutEffect(() => {
     if (theme === "dark") {
       document.body.classList.add("dark-mode");
     } else {
@@ -41,8 +43,17 @@ function App() {
     }
   }, [theme]);
 
+  useEffect(() => {
+    document.body.style.overflow = showWelcome ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showWelcome]);
+  
   // Efecto typewriter
   useEffect(() => {
+    if (showWelcome) return;
+
     let i = 0;
     setDisplayText("");
     const interval = setInterval(() => {
@@ -55,13 +66,13 @@ function App() {
     }, 119);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [showWelcome]);
 
   return (
     <>
       <Particles theme={theme} />
       <div className={`theme-icon ${theme} icon-style-aesthetic-adjustment`}>
-        {theme === 'dark' ? '🌙' : '☀️'}
+        {theme === 'dark' ? '\u{1F319}' : '\u2600\uFE0F'}
       </div>
 
       <title>Arturo Juárez Monroy</title>
@@ -277,14 +288,26 @@ function App() {
         </div>
 
         <footer>
-          <b>© Arturo Juárez Monroy · Hecho con React y Firebase ♡ </b>
+          <b>© Arturo Juárez Monroy · Hecho con React, Vue y Firebase ♡ </b>
         </footer>
       </div>
 
       {/* Botón cohete para volver arriba (solo visible en escritorio y tras hacer scroll) */}
       {showRocket && (
         <div className="rocket-button" onClick={scrollToTop} role="button" tabIndex={0} aria-label="Volver arriba">
-          <span className="rocket">🚀</span>
+          <span className="rocket">{'\u{1F680}'}</span>
+        </div>
+      )}
+
+      {showWelcome && (
+        <div className="welcome-overlay">
+          <div className="welcome-screen">
+            <h1 className="welcome-title">Bienvenido</h1>
+            <p className="welcome-text">Soy Arturo Juárez Monroy</p>
+            <button className="btn" onClick={() => setShowWelcome(false)}>
+              Siguiente
+            </button>
+          </div>
         </div>
       )}
     </>

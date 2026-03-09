@@ -976,3 +976,38 @@ body.dark-mode .project-link:hover {
     height: 140px;
   }
 }
+
+/* ===== Pantalla de bienvenida ===== */
+.welcome-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.97) 100%);
+}
+
+body.dark-mode .welcome-overlay {
+  background: linear-gradient(135deg, rgba(10, 14, 26, 0.95) 0%, rgba(5, 8, 16, 0.97) 100%);
+}
+
+.welcome-screen {
+  display: grid;
+  gap: 14px;
+  text-align: center;
+}
+
+.welcome-title {
+  font-family: var(--font-tech);
+  font-size: clamp(2rem, 6vw, 4rem);
+}
+
+.welcome-text {
+  color: var(--text-light-secondary);
+  font-size: 1.1rem;
+}
+
+body.dark-mode .welcome-text {
+  color: var(--text-dark-secondary);
+}
