@@ -4,7 +4,7 @@
 import { useState, useEffect, useLayoutEffect } from "react";
 import "./App.css";
 import "./cohetegoup.css";
-import profileImg from './assets/arurophoto.jpg';
+import profileImg from '../public/artsearch.png';
 import Particles from "./particulasfondo.jsx";
 import CommentSection from "./CommentSection.jsx";
 
