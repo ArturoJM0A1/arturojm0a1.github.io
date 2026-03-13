@@ -195,7 +195,7 @@ function App() {
           </div>
 
           <section className="contact">
-            <h3>Contacto</h3>
+            <h3>Conecta conmigo</h3>
             <p>
               <i className="fas fa-envelope" aria-hidden="true"></i>
               <a href="mailto:juarezmonroyarturo574@gmail.com">
@@ -212,14 +212,24 @@ function App() {
                 linkedin.com/in/arturo-juarez
               </a>
             </p>
-            <p>
-              <i className="fab fa-youtube" aria-hidden="true"></i>
+                        <p>
+              <i className="fab fa-github" aria-hidden="true"></i>
               <a
-                href="https://www.youtube.com/@arturojuarezmonroy3951"
+                href="https://github.com/ArturoJM0A1"
                 target="_blank"
                 rel="noreferrer"
               >
-                youtube.com/@arturojuarezmonroy3951
+                ArturoJM0A1
+              </a>
+            </p>
+            <p>
+              <i className="fab fa-youtube" aria-hidden="true"></i>
+              <a
+                href="arturojuarezmonroy3951"
+                target="_blank"
+                rel="noreferrer"
+              >
+                @arturojuarezmonroy3951
               </a>
             </p>
             <p>
@@ -517,6 +527,8 @@ function App() {
                   <i className="fas fa-video"></i> Video
                 </button>
               </div>
+
+              <div className="favoritos"></div>
             </div>
 
             <div className="card">

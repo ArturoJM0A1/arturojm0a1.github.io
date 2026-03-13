@@ -187,3 +187,39 @@ body.dark-mode .comment-success {
     padding: 12px;
   }
 }
+
+.favoritos{
+  background: rgba(239, 191, 4, 0.77);
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 14px;
+
+  clip-path: polygon(
+    50% 0%, 
+    61% 35%, 
+    98% 35%, 
+    68% 57%, 
+    79% 91%, 
+    50% 70%, 
+    21% 91%, 
+    32% 57%, 
+    2% 35%, 
+    39% 35%
+  );
+
+  animation: girar 12s linear infinite;
+}
+
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+    scale: 1;
+  }
+  to {
+    transform: rotate(360deg);
+    scale: 1.02;
+  }
+}
