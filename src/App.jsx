@@ -124,7 +124,7 @@ function App() {
       } else {
         clearInterval(interval);
       }
-    }, 119);
+    }, 123);
 
     return () => clearInterval(interval);
   }, [showWelcome]);
@@ -153,8 +153,8 @@ function App() {
               Ver mi trayectoria
             </a>
             <a
-              href="/cv.pdf"
-              download="cv.pdf"
+              href="/Currículum Arturo JM.pdf"
+              download="Currículum Arturo JM.pdf"
               className="btn botonhero"
               style={{ marginBottom: "10px" }}
             >
@@ -296,10 +296,7 @@ function App() {
           <section className="about" id="about">
             <h3>Acerca de mí</h3>
             <p>
-              He trabajado en varios proyectos durante mis estudios, donde
-              adquirí experiencia práctica en desarrollo de software. Me atraen
-              especialmente los proyectos creativos y seguir mejorando mis
-              habilidades mientras colaboro con otros desarrolladores.
+              Ingeniero de software con experiencia en desarrollo web de principio a fin. Hecreado aplicaciones usando React, Next.js, Astro, PHP y bases de datos SQL.También he trabajado en APIs, paneles administrativos, interfaces dinámicas ysistemas para mostrar datos. Me gusta el desarrollo frontend, las aplicacionesinteractivas y las soluciones basadas en datos.
             </p>
           </section>
 
@@ -307,12 +304,13 @@ function App() {
             <h3>Mis proyectos</h3>
 
             <div className="card">
-              <h4>Pirmides de Tula con A-Frame</h4>
+              <h4>Pirámides de Tula con A-Frame</h4>
               <div className="date">Trabajo escolar 2023</div>
               <p>
-                Usé A-Frame para mostrar un sitio arqueológico en realidad
-                virtual, creando una experiencia interactiva con presentación
-                clara y cuidada..
+                Usé A-Frame para desarrollar una experiencia de realidad virtual
+                que permite explorar un sitio arqueológico en un entorno 3D;
+                todas las composiciones y estructuras del escenario fueron
+                diseñadas por mí.
               </p>
               <div className="project-links">
                 <a
@@ -412,12 +410,42 @@ function App() {
             </div>
 
             <div className="card">
+              <h4>Sitio web IEEE Student Web Hub</h4>
+              <div className="date">Proyecto de la universidad 2024</div>
+              <p>
+                Colaboración en portal web para la rama estudiantil. Usando
+                Astro, React, CSS, JavaScript, Tailwind.
+              </p>
+              <div className="project-links">
+                <a
+                  href="https://github.com/IEEE-ESTl/IEEE-ESTl-Student-Web-Hub"
+                  className="project-link"
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Ver repositorio"
+                >
+                  <i className="fab fa-github"></i> Repo
+                </a>
+                <a
+                  href="https://ieee-estl.com/"
+                  className="project-link"
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Ver artículo"
+                >
+                  <i className="fa-solid fa-globe"></i> Visitar
+                </a>
+              </div>
+            </div>
+
+            <div className="card">
               <h4>Recetario</h4>
               <div className="date">Proyecto independiente 2024</div>
               <p>
-                Desarrollo de un sitio web interactivo de recetas, enfocado en
-                frontend, que permite explorar y guardar recetas y bebidas con
-                una experiencia de usuario intuitiva.
+                Desarrollo de un sitio web interactivo de recetas utilizando
+                CSS, Bootstrap y Swiper, enfocado en el frontend, que permite
+                explorar y guardar recetas y bebidas mediante una interfaz
+                intuitiva y una experiencia de usuario fluida.
               </p>
               <div className="project-links">
                 <a
