@@ -58,7 +58,7 @@ function App() {
       }
 
       if (!videoId) return null;
-      return `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+      return `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&vq=hd720&cc_load_policy=0`;
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       return null;
@@ -212,7 +212,7 @@ function App() {
                 linkedin.com/in/arturo-juarez
               </a>
             </p>
-                        <p>
+            <p>
               <i className="fab fa-github" aria-hidden="true"></i>
               <a
                 href="https://github.com/ArturoJM0A1"
@@ -306,7 +306,12 @@ function App() {
           <section className="about" id="about">
             <h3>Acerca de mí</h3>
             <p>
-              Ingeniero de software con experiencia en desarrollo web de principio a fin. Hecreado aplicaciones usando React, Next.js, Astro, PHP y bases de datos SQL.También he trabajado en APIs, paneles administrativos, interfaces dinámicas ysistemas para mostrar datos. Me gusta el desarrollo frontend, las aplicacionesinteractivas y las soluciones basadas en datos.
+              Ingeniero de software con experiencia en desarrollo web de
+              principio a fin. Hecreado aplicaciones usando React, Next.js,
+              Astro, PHP y bases de datos SQL.También he trabajado en APIs,
+              paneles administrativos, interfaces dinámicas ysistemas para
+              mostrar datos. Me gusta el desarrollo frontend, las
+              aplicacionesinteractivas y las soluciones basadas en datos.
             </p>
           </section>
 

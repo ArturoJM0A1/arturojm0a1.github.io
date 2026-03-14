@@ -189,7 +189,7 @@ body.dark-mode .comment-success {
 }
 
 .favoritos{
-  background: rgba(239, 191, 4, 0.77);
+  background: rgba(239, 191, 4, 0.9);
   width: 26px;
   height: 26px;
   position: absolute;
@@ -210,16 +210,31 @@ body.dark-mode .comment-success {
     39% 35%
   );
 
-  animation: girar 12s linear infinite;
+  animation: girar 6s ease-in-out infinite;
 }
 
 @keyframes girar {
-  from {
-    transform: rotate(0deg);
-    scale: 1;
+
+  0%{
+    transform: rotate(0deg) scale(1);
   }
-  to {
-    transform: rotate(360deg);
-    scale: 1.02;
+
+  25%{
+    transform: rotate(90deg) scale(1.08);
+          filter: brightness(112%);
   }
+
+  50%{
+    transform: rotate(180deg) scale(1);
+  }
+
+  75%{
+    transform: rotate(270deg) scale(1.08);
+      filter: brightness(114%);
+  }
+
+  100%{
+    transform: rotate(360deg) scale(1);
+  }
+
 }
