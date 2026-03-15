@@ -604,6 +604,21 @@ function App() {
                   <i className="fas fa-video"></i> Video
                 </button>
               </div>
+     
+            </div>
+
+            <div className="card">
+              <h4>Sistema de gestion de gastos personales</h4>
+              <div className="date">Aplicación Web 2026</div>
+              <p>
+                Usando Astro y PostgreSQL, en desarrollo...
+              </p>
+              <div className="project-links">
+
+              </div>
+              <div className="contenedorTuerca">
+                <div className="Tuerca"></div>
+              </div>
             </div>
           </section>
 

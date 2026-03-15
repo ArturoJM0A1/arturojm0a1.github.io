@@ -63,7 +63,7 @@ body.dark-mode .comment-form textarea {
   font-size: 0.95rem;
   margin: -5px 0 5px;
 }
- 
+
 .comment-list {
   display: flex;
   flex-direction: column;
@@ -136,9 +136,11 @@ body.dark-mode .comment-email {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .comment-date {
     margin-left: 0;
   }
+
   .comment-form .btn {
     align-self: stretch;
   }
@@ -162,6 +164,7 @@ body.dark-mode .comment-success {
 
 /* Responsive para comentarios */
 @media (max-width: 768px) {
+
   .comment-form input,
   .comment-form textarea {
     font-size: 1rem;
@@ -188,7 +191,7 @@ body.dark-mode .comment-success {
   }
 }
 
-.favoritos{
+.favoritos {
   background: rgba(239, 191, 4, 0.9);
   width: 26px;
   height: 26px;
@@ -197,44 +200,191 @@ body.dark-mode .comment-success {
   right: 0;
   margin: 14px;
 
-  clip-path: polygon(
-    50% 0%, 
-    61% 35%, 
-    98% 35%, 
-    68% 57%, 
-    79% 91%, 
-    50% 70%, 
-    21% 91%, 
-    32% 57%, 
-    2% 35%, 
-    39% 35%
-  );
+  clip-path: polygon(50% 0%,
+      61% 35%,
+      98% 35%,
+      68% 57%,
+      79% 91%,
+      50% 70%,
+      21% 91%,
+      32% 57%,
+      2% 35%,
+      39% 35%);
 
-  animation: girar 6s ease-in-out infinite;
+  animation: girarEstrella 6s ease-in-out infinite;
 }
 
-@keyframes girar {
+@keyframes girarEstrella {
 
-  0%{
+  0% {
     transform: rotate(0deg) scale(1);
   }
 
-  25%{
+  25% {
     transform: rotate(90deg) scale(1.08);
-          filter: brightness(112%);
+    filter: brightness(112%);
   }
 
-  50%{
+  50% {
     transform: rotate(180deg) scale(1);
   }
 
-  75%{
+  75% {
     transform: rotate(270deg) scale(1.08);
-      filter: brightness(114%);
+    filter: brightness(114%);
   }
 
-  100%{
+  100% {
     transform: rotate(360deg) scale(1);
+  }
+
+}
+
+
+
+
+
+
+
+.contenedorTuerca {
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 14px;
+  background: transparent;
+  z-index: 10;
+  padding: 0;
+  overflow: hidden;
+  animation: girarTuerca 6s ease-in-out infinite;
+
+}
+
+
+
+.Tuerca {
+  padding: 0;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  scale: 1.55;
+
+  background: radial-gradient(circle at 30% 30%, #e0e0e0, #8a8a8a);
+  /* clip-path con 32 puntos (16 dientes) */
+  clip-path: polygon(
+      /* Diente 1 (derecha) */
+      85% 50%,
+      /* Valle 1 */
+      75% 44%,
+      /* Diente 2 (45°) */
+      79% 29%,
+      /* Valle 2 */
+      68% 32%,
+      /* Diente 3 (arriba-derecha) */
+      68% 18%,
+      /* Valle 3 */
+      56% 26%,
+      /* Diente 4 (arriba) */
+      50% 15%,
+      /* Valle 4 */
+      44% 26%,
+      /* Diente 5 (arriba-izquierda) */
+      32% 18%,
+      /* Valle 5 */
+      32% 32%,
+      /* Diente 6 (izquierda-arriba) */
+      21% 29%,
+      /* Valle 6 */
+      25% 44%,
+      /* Diente 7 (izquierda) */
+      15% 50%,
+      /* Valle 7 */
+      25% 56%,
+      /* Diente 8 (izquierda-abajo) */
+      21% 71%,
+      /* Valle 8 */
+      32% 68%,
+      /* Diente 9 (abajo-izquierda) */
+      32% 82%,
+      /* Valle 9 */
+      44% 74%,
+      /* Diente 10 (abajo) */
+      50% 85%,
+      /* Valle 10 */
+      56% 74%,
+      /* Diente 11 (abajo-derecha) */
+      68% 82%,
+      /* Valle 11 */
+      68% 68%,
+      /* Diente 12 (derecha-abajo) */
+      79% 71%,
+      /* Valle 12 */
+      75% 56%,
+      /* Diente 13 (derecha, repite para cerrar) */
+      85% 50%);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), inset 0 -5px 10px rgba(255, 255, 255, 0.3), inset 0 5px 10px rgba(0, 0, 0, 0.3);
+  /* Ajuste para centrar los dientes */
+
+
+}
+
+/* Agujero central */
+.Tuerca::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28%;
+  height: 28%;
+  background: radial-gradient(circle at 30% 30%, #606060, #2a2a2a);
+  border-radius: 50%;
+  box-shadow: inset -3px -3px 5px #00000080, inset 3px 3px 5px #ffffff80;
+  z-index: 2;
+}
+
+/* Detalle del eje (tornillo) */
+.Tuerca::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8%;
+  height: 8%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(221, 232, 249, 0.2),);
+  border-radius: 50%;
+  box-shadow: 0 0 5px #00000080;
+  z-index: 3;
+        outline: 2px solid #333333;
+
+}
+
+/* Efecto de brillo metálico adicional */
+@keyframes girarTuerca {
+
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(90deg);
+    filter: brightness(112%);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  75% {
+    transform: rotate(270deg);
+    filter: brightness(114%);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 
 }
